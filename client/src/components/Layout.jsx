@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
       <>
         <div className="flex justify-between items-center bg-gradient-to-r from-[#0069DC] to-[#594177] p-3 max-h-25 ">
           <h1 className="text-2xl text-white">
-            <a href='/'><img src={logo} alt="Proctopous" style={{ display:"inline-block", width: '3rem' }} />  Proctopous</a>
+            <a href='/'><img src={logo} alt="Proctopous" style={{ display:"inline-block", width: '3rem' }} /> <strong>Proctopous</strong></a>
           </h1>
           <div className="flex items-center justify-end ">
             <ul className="flex gap-6 list-none mr-8">
@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
                 </a>
               </li>
           
-              <li>
+              {/* <li>
                 <a
                   href="/about"
                   className="text-white text-xl hover:text-gray-600 no-underline hover:bg-gray-200 p-1 hover:rounded"
@@ -63,13 +63,13 @@ const Layout = ({ children }) => {
                 >
                   About Us
                 </a>
-              </li>
+              </li> */}
 
 
               <li>
                 <a
                   href={user.isInstitution ? '/institution-dashboard' : '/student-dashboard'}
-                  className="text-white text-xl hover:text-gray-600 no-underline hover:bg-gray-200 p-1 hover:rounded"
+                  className="text-white text-xl hover:text-gray-600 hover:font-size:1.2rem no-underline hover:bg-gray-200 p-1 hover:rounded"
                 >
                   Dashboard
                 </a>

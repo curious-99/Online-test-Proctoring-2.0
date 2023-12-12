@@ -56,15 +56,15 @@ def video_streaming():
         faces = face_detection.process(image)
         if not faces.detections:
             not_detected +=1
-            cv2.putText(image,"No Person Detected",(5,40),cv2.FONT_HERSHEY_COMPLEX,1,(255,0,0),1)
+            cv2.putText(image,"No Person Detected",(200,650),cv2.FONT_HERSHEY_COMPLEX,3,(0,0,0),5)
         else:
             if not(keypoints.multi_face_landmarks):
                 not_detected +=1
-                cv2.putText(image,"No Person Detected",(5,40),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),1)
+                cv2.putText(image,"No Person Detected",(200, 650),cv2.FONT_HERSHEY_SIMPLEX,3,(0,0,0),5)
             else:
                 if(len(faces.detections) > 1):
                     many_person += 1
-                    cv2.putText(image,"Many Persons Detected",(5,40),cv2.FONT_HERSHEY_COMPLEX,1,(255,0,0),1)
+                    cv2.putText(image,"Many Persons Detected",(60,650),cv2.FONT_HERSHEY_COMPLEX,3,(0,0,0),5)
                 else:
                     img_h, img_w, img_c = image.shape
                     face_3d = []
@@ -125,7 +125,7 @@ def video_streaming():
                         text = "Looking Up"
                         head_move += 1
                     else:
-                        text = "looking Forward"
+                        text = "Looking Forward"
             
                     lip_distance = (cal_distance(upperlip_1,lowerlip_1)
                                 + cal_distance(upperlip_2,lowerlip_2)
@@ -137,10 +137,10 @@ def video_streaming():
                         lip_text = "Talking" 
                         talk += 1
                     else:
-                        lip_text = "not talking"
+                        lip_text = "Not Talking"
             
-                    cv2.putText(image,lip_text,(5,70),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),1)
-                    cv2.putText(image, text, (5, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 1)
+                    cv2.putText(image,lip_text,(200,550),cv2.FONT_HERSHEY_SIMPLEX,3,(0,0,0),5)
+                    cv2.putText(image, text, (200, 450), cv2.FONT_HERSHEY_SIMPLEX, 3, (0,0,0), 5)
                     # cv2.putText(image, "x: " + str(np.round(x,2)), (500, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
                     # cv2.putText(image, "y: " + str(np.round(y,2)), (500, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
                     # cv2.putText(image, "z: " + str(np.round(z,2)), (500, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
@@ -153,7 +153,8 @@ def video_streaming():
         if phone:
             phone_sus += 1
             cv2.rectangle(image,(phone[0],phone[1]),(phone[2],phone[3]),(0,0,255),1,1)
-            cv2.putText(image,"phone detected",(5,100),cv2.FONT_HERSHEY_TRIPLEX,1,(255,0,0),1)
+            cv2.putText(image,"phone detected",(200,100),cv2.FONT_HERSHEY_TRIPLEX,3,(0,0,0),3)
+        image = cv2.cvtColor(image,cv2.COLOR_RGB2BGR) 
         ret,buffer = cv2.imencode(".jpg",image)
         image = buffer.tobytes()
         yield (b'--frame\r\n'
@@ -203,11 +204,6 @@ api.add_resource(Hello,'/')
 api.add_resource(Stream,'/stream')
 api.add_resource(Start_Test,'/start-test')
 api.add_resource(Stop_Test,'/submit-test')
-
-
-
-
-
 
 
 if __name__ == '__main__':
