@@ -112,16 +112,16 @@ def video_streaming():
                     z = angles[2] * 360
             
 
-                    if y < -15:
+                    if y < -12:
                         text = "Looking Left"
                         head_move += 1
-                    elif y > 15:
+                    elif y > 12:
                         text = "Looking Right"
                         head_move += 1
-                    elif x < -13:
+                    elif x < -12:
                         text = "Looking Down"
                         head_move += 1
-                    elif x > 13:
+                    elif x > 12:
                         text = "Looking Up"
                         head_move += 1
                     else:

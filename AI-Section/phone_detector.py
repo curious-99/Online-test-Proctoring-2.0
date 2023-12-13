@@ -30,7 +30,7 @@ class phone_detection:
         for i in range(anchors):
             anchor_output = outputs[i]
             confidence = anchor_output[4]
-            if confidence >= 0.6:
+            if confidence >= 0.4:
                 class_scores = anchor_output[5:]
                 _,_,_,max_index = cv2.minMaxLoc(class_scores)
                 class_id = max_index[1]
@@ -43,7 +43,7 @@ class phone_detection:
                     x_max = int(x + w*x_factor)
                     y_max = int(y + h*y_factor)
                     boxes.append(np.array([x_min,y_min,x_max,y_max]))
-        indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.35, 0.45) 
+        indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.35, 0.35) 
         result_class_ids = []
         result_confidences = [] 
         result_boxes = []
